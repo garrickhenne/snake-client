@@ -1,5 +1,5 @@
 module.exports = {
-  IP: 'localhost',
+  IP: '165.227.47.243',
   PORT: 50541,
   MOVE_UP_KEY: 'Move: up',
   MOVE_DOWN_KEY: 'Move: down',

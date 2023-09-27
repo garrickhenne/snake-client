@@ -1,6 +1,9 @@
+const { clearInterval } = require('timers');
 const { MOVE_UP_KEY, MOVE_DOWN_KEY, MOVE_LEFT_KEY, MOVE_RIGHT_KEY } = require('./constants');
 
 let connection;
+let currDirection = null;
+let refreshRate = 70;
 
 const handleUserInput = (data) => {
   if (data === '\u0003') {
@@ -8,27 +11,43 @@ const handleUserInput = (data) => {
   }
 
   if (data === 'w') {
-    connection.write(MOVE_UP_KEY);
-    console.log(MOVE_UP_KEY);
+    clearInterval(currDirection);
+    currDirection = setInterval(() => {
+      connection.write(MOVE_UP_KEY);
+    }, refreshRate);
   }
 
   if (data === 'a') {
-    connection.write(MOVE_LEFT_KEY);
-    console.log(MOVE_LEFT_KEY);
+    clearInterval(currDirection);
+    currDirection = setInterval(() => {
+      connection.write(MOVE_LEFT_KEY);
+    }, refreshRate);
   }
 
   if (data === 's') {
-    connection.write(MOVE_DOWN_KEY);
-    console.log(MOVE_DOWN_KEY);
+    clearInterval(currDirection);
+    currDirection = setInterval(() => {
+      connection.write(MOVE_DOWN_KEY);
+    }, refreshRate);
   }
 
   if (data === 'd') {
-    connection.write(MOVE_RIGHT_KEY);
-    console.log(MOVE_RIGHT_KEY);
+    clearInterval(currDirection);
+    currDirection = setInterval(() => {
+      connection.write(MOVE_RIGHT_KEY);
+    }, refreshRate);
   }
 
   if (data === 'g') {
     connection.write('Say: GG');
+  }
+
+  if (data === 'h') {
+    connection.write('Say: HI!');
+  }
+
+  if (data === 'c') {
+    clearInterval(currDirection);
   }
 };
 
